@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BigQuery Release Notes Explorer</title>
+    <meta name="description" content="Browse, search, and share the latest BigQuery release notes and updates.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="dark-theme">
+    <div class="glass-bg"></div>
+    
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo">
+                <i class="fa-solid fa-database logo-icon"></i>
+                <h1>BigQuery <span class="gradient-text">Release Notes</span></h1>
+            </div>
+            <div class="header-controls">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search updates...">
+                </div>
+                <button id="refreshBtn" class="btn btn-primary" title="Refresh release notes">
+                    <i id="refreshIcon" class="fa-solid fa-arrows-rotate"></i>
+                    <span>Refresh</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <div class="main-container">
+            <!-- Filter Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-card glass-panel">
+                    <h3>Filter by Type</h3>
+                    <div class="filter-options">
+                        <button class="filter-btn active" data-filter="all">
+                            <span class="dot all-dot"></span> All Updates
+                        </button>
+                        <button class="filter-btn" data-filter="feature">
+                            <span class="dot feature-dot"></span> Features
+                        </button>
+                        <button class="filter-btn" data-filter="change">
+                            <span class="dot change-dot"></span> Changes
+                        </button>
+                        <button class="filter-btn" data-filter="deprecation">
+                            <span class="dot deprecation-dot"></span> Deprecations
+                        </button>
+                    </div>
+                </div>
+                <div class="sidebar-card glass-panel stats-card">
+                    <h3>Feed Status</h3>
+                    <div class="stat-item">
+                        <span class="stat-label">Source:</span>
+                        <a href="https://docs.cloud.google.com/feeds/bigquery-release-notes.xml" target="_blank" class="feed-link">BigQuery Feed <i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Last Updated:</span>
+                        <span id="lastUpdatedVal">-</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- News Feed Content -->
+            <section class="feed-content">
+                <div id="loadingState" class="loading-state hidden">
+                    <div class="spinner"></div>
+                    <p>Fetching latest release notes...</p>
+                </div>
+                <div id="errorState" class="error-state glass-panel hidden">
+                    <i class="fa-solid fa-circle-exclamation error-icon"></i>
+                    <h3>Failed to Load Feed</h3>
+                    <p id="errorMessage">Please check your network connection and try again.</p>
+                    <button id="retryBtn" class="btn btn-secondary">Retry</button>
+                </div>
+                <div id="feedList" class="feed-list">
+                    <!-- Dynamic updates will be injected here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Tweet Modal -->
+    <div id="tweetModal" class="modal-overlay hidden">
+        <div class="modal-content glass-panel animate-scale">
+            <div class="modal-header">
+                <h2><i class="fa-brands fa-x-twitter"></i> Share Update to X</h2>
+                <button id="closeModalBtn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="update-preview-box">
+                    <span class="preview-tag" id="modalUpdateTag">Feature</span>
+                    <span class="preview-date" id="modalUpdateDate">July 09, 2026</span>
+                    <p class="preview-desc" id="modalUpdateDesc">Update details here...</p>
+                </div>
+                <div class="composer-container">
+                    <label for="tweetText">Compose Tweet:</label>
+                    <textarea id="tweetText" rows="5" maxlength="280"></textarea>
+                    <div class="composer-footer">
+                        <span class="char-counter" id="charCounter">0 / 280</span>
+                        <span class="warning-text hidden" id="charWarning">Over limit!</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelModalBtn" class="btn btn-secondary">Cancel</button>
+                <button id="tweetSubmitBtn" class="btn btn-twitter">
+                    <i class="fa-brands fa-x-twitter"></i> Post Update
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

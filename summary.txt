@@ -1,0 +1,8 @@
+SUMMARY OF WORLD NEWS - JULY 12, 2026
+
+Source File: news.txt
+
+- Weather & Disasters: Eastern China is bracing for Typhoon Bavi, which has already caused 17 deaths in the Philippines. In India, a cloudburst triggered tourist evacuations in Jammu and Kashmir.
+- Conflicts: Escalations continue in Ukraine following a massive Russian drone/missile strike, and Kyiv's counter-strike in the Sea of Azov. U.S.-Iran tensions rise as Iran vows revenge and Trump warns of decimation.
+- Tech & Business: Apple has sued OpenAI over talent poaching. OpenAI is preparing for a September IPO. Google's Gemini 3.5 Pro is set to release on July 17. The USPS increased the first-class stamp price to 82 cents.
+- Observances: Today marks Malala Day and the International Day of Combating Sand and Dust Storms.
